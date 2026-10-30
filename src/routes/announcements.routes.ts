@@ -12,7 +12,7 @@ const router = Router();
 router.get("/", validateQuery(announcementsQuerySchema), listAnnouncements);
 router.get("/:id", validateParams(announcementIdSchema), getAnnouncement);
 router.post("/", authenticate, upload.single("image"), validateBody(createAnnouncementSchema), createAnnouncement);
-router.patch("/:id", authenticate, validateParams(announcementIdSchema), upload.single("image"), validateBody(updateAnnouncementSchema), updateAnnouncement);
+router.patch("/:id", authenticate, validateParams(announcementIdSchema), upload.single("image"), validateBody(updateAnnouncementSchema, { requireBodyOrFile: true }), updateAnnouncement);
 router.delete("/:id", authenticate, validateParams(announcementIdSchema), deleteAnnouncement);
 
 registry.registerPath({ method: "get", path: "/announcements", summary: "List announcements", request: { query: announcementsQuerySchema }, responses: { 200: { description: "Announcements" } } });

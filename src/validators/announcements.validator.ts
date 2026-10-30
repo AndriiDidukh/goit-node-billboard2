@@ -8,10 +8,7 @@ const announcementFields = {
 };
 
 export const createAnnouncementSchema = z.object(announcementFields);
-export const updateAnnouncementSchema = z.object(announcementFields).partial().refine(
-  (value) => Object.keys(value).length > 0,
-  { message: "At least one field must be provided" },
-);
+export const updateAnnouncementSchema = z.object(announcementFields).partial();
 export const announcementIdSchema = z.object({ id: z.coerce.number().int().positive() });
 export const announcementsQuerySchema = z.object({
   search: z.string().optional(),
